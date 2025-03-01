@@ -1,5 +1,5 @@
 import { useGetRevisionQueries } from '@/queries/articles.query';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { mapRevision } from '@/lib/utils/mapRevisionQueries';
@@ -13,6 +13,7 @@ interface IRevisionPageProps {
 }
 const RevisionPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const state = location.state as IRevisionPageProps | null;
   if (!state) {
     return <div>Error: No revision data available.</div>;
@@ -34,13 +35,13 @@ const RevisionPage = () => {
     }
     try {
       await revertArticle({ slug: state?.slug, id: revision?.id });
+
       toast.success('Revision reverted successfully!');
-      queryClient.invalidateQueries(['revisions', state.slug]);
+      navigate(`/`);
     } catch (error) {
       toast.error('Failed to revert the revision.');
     }
   };
-
   return (
     <div className="article-page">
       <div className="banner">

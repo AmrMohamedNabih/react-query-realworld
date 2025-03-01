@@ -9,7 +9,8 @@ interface IRevisionProps {
 }
 
 const RevisionCard = ({ article, slug }: IRevisionProps) => {
-  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const handleRevert = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -17,7 +18,7 @@ const RevisionCard = ({ article, slug }: IRevisionProps) => {
       await revertArticle({ slug, id: article.id });
 
       toast.success('Revision reverted successfully!');
-      queryClient.invalidateQueries(['revisions', slug]);
+      navigate(`/`);
     } catch (error) {
       toast.error('Failed to revert the revision.');
     }

@@ -4,7 +4,9 @@ import { useGetRevisionsQueries } from '@/queries/articles.query';
 import { useLocation } from 'react-router-dom';
 const HistoryPage = () => {
   const { state } = useLocation();
-
+  if (!state) {
+    return <div>Error: No revision data available.</div>;
+  }
   const { data: revisions, isLoading, error } = useGetRevisionsQueries(state.slug);
 
   if (isLoading) return <p>Loading...</p>;
@@ -12,7 +14,9 @@ const HistoryPage = () => {
     const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
     return <p>Error: {errorMessage}</p>;
   }
+  console.log('1 : ', revisions);
   const revisionList: IRevision[] = revisions?.data.data ?? [];
+  console.log('2 : ', revisionList);
 
   return (
     <>
@@ -34,30 +38,3 @@ const HistoryPage = () => {
 };
 
 export default HistoryPage;
-// <>
-//   <div role="presentation" className="article-preview">
-//     <div className="article-meta">
-//       <a href="profile.html">
-//         <img src={article.author.image} alt="profile" />
-//       </a>
-//       <div className="info">
-//         <Link to={`/profile/${article.author.username}`} state={article.author.username} className="author">
-//           {article.author.username}
-//         </Link>
-//         <span className="date">{convertToDate(article.createdAt)}</span>
-//       </div>
-//       <button
-//         type="button"
-//         className={`btn ${article.favorited ? 'btn-primary' : 'btn-outline-primary'} btn-sm pull-xs-right`}
-//         onClick={() => onToggleFavorite()}
-//       >
-//         <i className="ion-heart"></i> {article.favoritesCount}
-//       </button>
-//     </div>
-//     <Link to={`/article/${article.slug}`} state={article.slug} className="preview-link">
-//       <h1>{article.title}</h1>
-//       <p>{article.description}</p>
-//       <span>Read more...</span>
-//     </Link>
-//   </div>
-// </>

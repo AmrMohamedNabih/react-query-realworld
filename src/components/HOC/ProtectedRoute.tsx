@@ -15,6 +15,8 @@ const ProtectedRoute = ({ children, path }: IProtectedRoute) => {
     !isLogin &&
     (path === routerMeta.NewArticlePage.path ||
       path === routerMeta.EditArticlePage.path ||
+      path === routerMeta.RevisionPage.path ||
+      path === routerMeta.HistoryPage.path ||
       path === routerMeta.SettingPage.path)
   ) {
     return <Navigate to={routerMeta.SignInPage.path} replace={true} />;
