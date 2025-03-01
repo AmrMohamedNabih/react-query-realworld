@@ -9,6 +9,9 @@ import {
   createCommentParam,
   deleteCommentParam,
   favoriteParam,
+  getRevisionsParam,
+  revertArticleParam,
+  getRevisionParam,
 } from './articlesRepository.param';
 import { UNIT_PER_PAGE } from '@/constants/units.constants';
 
@@ -102,5 +105,25 @@ export const unfavoriteArticle = async ({ slug }: favoriteParam) => {
   return await apiClient({
     method: 'delete',
     url: `/articles/${slug}/favorite`,
+  });
+};
+
+export const getRevisions = async ({ slug }: getRevisionsParam) => {
+  return await apiClient({
+    method: 'get',
+    url: `/articles/${slug}/revisions`,
+  });
+};
+export const getRevision = async ({ slug, id }: getRevisionParam) => {
+  return await apiClient({
+    method: 'get',
+    url: `/articles/${slug}/revisions/${id}`,
+  });
+};
+export const revertArticle = async ({ slug, id }: revertArticleParam) => {
+  console.log(`revert article`, slug, id);
+  return await apiClient({
+    method: 'post',
+    url: `/articles/${slug}/revisions/${id}/revert`,
   });
 };

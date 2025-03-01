@@ -10,9 +10,12 @@ import {
   deleteComment,
   favoriteArticle,
   unfavoriteArticle,
+  getRevisions,
+  getRevision,
+  revertArticle,
 } from '@/repositories/articles/articlesRepository';
 import { getTags } from '@/repositories/tags/tagsRepository';
-import { useMutation, useQueries } from '@tanstack/react-query';
+import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
 
 export const useGetArticlesQueries = (isGlobal: boolean, page: number, selectedTag: string) => {
   return useQueries({
@@ -45,6 +48,28 @@ export const useGetArticleQueries = (slug: string) => {
         staleTime: 20000,
       },
     ],
+  });
+};
+
+export const useGetRevisionsQueries = (slug: string) => {
+  return useQuery({
+    queryKey: ['revisions', slug],
+    queryFn: () => getRevisions({ slug }),
+    enabled: !!slug,
+  });
+};
+export const useGetRevisionQueries = (slug: string, id: number) => {
+  return useQuery({
+    queryKey: ['revisions', slug],
+    queryFn: () => getRevision({ slug, id }),
+    enabled: !!slug,
+  });
+};
+export const useRevertQueries = (slug: string, id: number) => {
+  return useQuery({
+    queryKey: ['revisions', slug],
+    queryFn: () => revertArticle({ slug, id }),
+    enabled: !!slug,
   });
 };
 
