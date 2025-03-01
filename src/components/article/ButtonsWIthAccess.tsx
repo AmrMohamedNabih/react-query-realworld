@@ -34,6 +34,14 @@ const ButtonsWIthAccess = ({ articleInfo }: IButtonsWIthAccessProps) => {
         <i className="ion-edit"></i>&nbsp; Edit Article
       </button>
       &nbsp;&nbsp;
+      <button
+        className="btn btn-sm btn-outline-success"
+        type="button"
+        onClick={() => navigate(`/history/${articleInfo.slug}`, { state: articleInfo })}
+      >
+        <i className="ion-ios-time"></i>&nbsp; History
+      </button>
+      &nbsp;&nbsp;
       <button className="btn btn-sm btn-outline-danger" type="button" onClick={() => onDelete(articleInfo.slug)}>
         <i className="ion-trash-a"></i>&nbsp; Delete Article
       </button>
