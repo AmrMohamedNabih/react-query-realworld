@@ -46,3 +46,14 @@ export interface deleteCommentParam {
 export interface favoriteParam {
   slug: string;
 }
+export interface getRevisionsParam {
+  slug: string;
+}
+export interface getRevisionParam {
+  id: number;
+  slug: string;
+}
+export interface revertArticleParam {
+  id: number;
+  slug: string;
+}

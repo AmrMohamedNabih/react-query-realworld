@@ -30,6 +30,18 @@ const routerMeta: RouterMetaType = {
     path: '/editor/:slug',
     isShow: false,
   },
+  HistoryPage: {
+    name: 'History',
+    path: '/history/:slug',
+    isShow: false,
+    isAuth: true,
+  },
+  RevisionPage: {
+    name: 'Revision',
+    path: '/revision/:id',
+    isShow: false,
+    isAuth: true,
+  },
   SettingPage: {
     name: 'Setting',
     path: '/settings',

@@ -15,6 +15,14 @@ export interface IArticle {
     following: true;
   };
 }
+export interface IRevision {
+  id: number;
+  title: string;
+  description: string;
+  body: string;
+  tagList: string[];
+  createdAt: string;
+}
 
 export interface IComment {
   id: number;
